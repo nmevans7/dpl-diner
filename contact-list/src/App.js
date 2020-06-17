@@ -31,6 +31,17 @@ class App extends Component {
     })
     this.setState({ contacts })
   }
+  updateContact = (id, updatedContact) => {
+    const { contacts } = this.state;
+    this.setState({
+      contacts: contacts.map( c => {
+        if (c.id === id) {
+          return { ...updatedContact }
+        }
+        return c
+      })
+    })
+  }
   render() {
     const { contacts, showForm } = this.state
     return(
@@ -49,7 +60,11 @@ class App extends Component {
         <Header size="huge" color='blue' textAlign='center'>
           Contact list
         </Header>
-        <Contacts contacts={contacts} deleteContact={this.deleteContact}/>
+        <Contacts 
+          contacts={contacts} 
+          deleteContact={this.deleteContact} 
+          updateContact={this.updateContact}
+        />
       </div>
     )
   }
